@@ -36,7 +36,7 @@ const promptUser = () => {
       type: "input",
       name: "installation",
       message: "How will you install your app?",
-      //validate:
+      // R E S P O N C E  V A L I D A T I O N
       validate: (value) => {
         if (value) {
           return true;
