@@ -58,7 +58,8 @@ const promptUser = () => {
     {
       type: "checkbox",
       name: "languages",
-      message: "Which programming languages did you use to build this project? (Select all that apply)",
+      message:
+        "Which programming languages did you use to build this project? (Select all that apply)",
       choices: [
         "JavaScript",
         "HTML",
@@ -86,14 +87,7 @@ const promptUser = () => {
       type: "list",
       name: "license",
       message: "What type of licensing did you use?",
-      choices: [
-        "MIT",
-        "ISC",
-        "Apache",
-        "GNU",
-        "BSD",
-        "N/A",
-      ],
+      choices: ["MIT", "ISC", "Apache", "GNU", "BSD", "N/A"],
       // R E S P O N C E  V A L I D A T I O N
       validate: (value) => {
         if (value) {
@@ -104,17 +98,55 @@ const promptUser = () => {
       },
     },
 
-/* // TODO: Include packages needed for this application
+    {
+      type: "input",
+      name: "name",
+      message: "Enter your name?",
+      validate: (value) => {
+        if (value) {
+          return true;
+        } else {
+          return "Must enter your name to continue!";
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "Enter your GitHub username:",
+      validate: (value) => {
+        if (value) {
+          return true;
+        } else {
+          return "Must enter username to continue!";
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is your email?",
+    },
+    {
+      type: "input",
+      name: "phone",
+      message: "What is your phone number?",
+    },
+    {
+      type: "input",
+      name: "about",
+      message: "Provide some info about you:",
+    },
+  ]);
+};
 
-// TODO: Create an array of questions for user input
-const questions = [];
+promptUser().then((data) => {
+  const pageREADME = generatePage(data);
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
- */
+  fs.writeFile("./README.md", pageREADME, (err) => {
+    if (err) throw new Error(err);
+    console.log(
+      "README has been generated! Go to the README.md file to see results."
+    );
+  });
+});
